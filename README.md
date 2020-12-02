@@ -6,7 +6,7 @@ _This app uses NodeJs, create-react-app, chakra-ui, react-icons, framer-motion, 
 ## Set up 🔧
 _Run commands_
 ```
-git clone
+git pull
 ```
 ```
 cd car-cinema-app
