@@ -1,9 +1,9 @@
 import {Box} from '@chakra-ui/react'
 
-export const index = () => {
+export const Body = () => {
     return (
         <Box>
-            Header
+            Body
         </Box>
     )
 }
