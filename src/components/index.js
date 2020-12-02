@@ -1,0 +1,7 @@
+export {index as Header} from './Header/index'
+export {index as Body} from './Body/index'
+export {index as FooterDetailsMovies} from './FooterDetailsMovies/index'
+export {index as About} from './About/index'
+export {index as FooterAbout} from './FooterAbout/index'
+export {index as FooterBody} from './FooterBody/index'
+export {index as DetailsMovies} from './DetailsMovies/index'
