@@ -20,15 +20,7 @@ function App() {
           <FooterBody />
         </Route>
         <Route exact path="/about">
-          <Flex
-            flexDir={{
-              base: "column",
-            }}
-            h={{
-              base: "100vh",
-            }}
-            fontSize={{ base: "16px" }}
-          >
+          <Flex direction="column" h="100vh" fontSize="1rem">
             <Header />
             <About />
             <FooterAbout />
