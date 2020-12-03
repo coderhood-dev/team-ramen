@@ -8,7 +8,7 @@ import {
   FooterBody,
   DetailsMovies,
   FooterDetailsMovies,
-} from "./components/index";
+} from "./components";
 
 function App() {
   return (

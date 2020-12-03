@@ -20,7 +20,7 @@ const Title = () => {
 const TextInfo = () => {
   return (
     <Flex
-      bg={{ base: "#C53030" }}
+      bg="#C53030"
       borderRadius="0px 39px 0px 37px"
       w="15rem"
       h="7.2rem"
@@ -31,9 +31,7 @@ const TextInfo = () => {
         w="91%"
         textShadow="0px 4px 4px rgba(0, 0, 0, 0.25)"
         fontWeight="bold"
-        marginLeft={{
-          base: "0.5rem",
-        }}
+        marginLeft="0.5rem"
         fontSize="1.12rem"
         lineHeight="1.37rem"
         color="black"
@@ -50,17 +48,13 @@ export const FooterAbout = () => {
       h="41%"
       bg="linear-gradient(180deg, rgba(84, 19, 19, 0.87) 0%, #621717 7.55%, #360D0D 20.56%, #000000 60.94%);"
       direction="row"
-      justifyContent={{
-        base: "space-between",
-      }}
+      justifyContent="space-between"
     >
       <Flex
-        flexDir={{
-          base: "column",
-        }}
-        justifyContent={{ base: "flex-end" }}
-        marginLeft={{ base: "2rem" }}
-        marginBottom={{ base: "3.5rem" }}
+        flexDir="column"
+        justifyContent="flex-end"
+        marginLeft="2rem"
+        marginBottom="3.5rem"
       >
         <Title />
         <TextInfo />
