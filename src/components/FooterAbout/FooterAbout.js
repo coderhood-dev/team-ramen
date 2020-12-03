@@ -46,6 +46,7 @@ const TextInfo = () => {
         lineHeight={{
           base: "22px",
         }}
+        color="black"
       >
         Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
         tempo
