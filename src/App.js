@@ -1,3 +1,4 @@
+import { Flex } from "@chakra-ui/react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import {
   Header,
@@ -20,9 +21,11 @@ function App() {
           <FooterBody />
         </Route>
         <Route exact path="/about">
-          <Header />
-          <About />
-          <FooterAbout />
+          <Flex direction="column" h="100vh" fontSize="1rem">
+            <Header />
+            <About />
+            <FooterAbout />
+          </Flex>
         </Route>
         <Route exact path="/details/:id">
           <Header />
