@@ -1,5 +1,5 @@
 import React from 'react';
-import { Grid, Image, Heading } from '@chakra-ui/react';
+import { Grid, Image, Heading, Link } from '@chakra-ui/react';
 
 export const GridPopularMovies = ({ movies }) => {
   return (
@@ -21,11 +21,13 @@ export const GridPopularMovies = ({ movies }) => {
       >
         {movies.map((movie) => {
           return (
-            <Image
-              key={movie.id}
-              src={`https://image.tmdb.org/t/p/original${movie.poster_path}`}
-              alt={movie.name}
-            />
+            <Link href={`/details/${movie.id}`}>
+              <Image
+                key={movie.id}
+                src={`https://image.tmdb.org/t/p/original${movie.poster_path}`}
+                alt={movie.name}
+              />
+            </Link>
           );
         })}
       </Grid>
