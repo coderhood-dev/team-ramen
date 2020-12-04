@@ -1,12 +1,5 @@
 import React from 'react';
-import {
-  Flex,
-  Text,
-  Spinner,
-  Heading,
-  Box,
-  useMediaQuery,
-} from '@chakra-ui/react';
+import { Flex, Text, Spinner, Box, useMediaQuery } from '@chakra-ui/react';
 import { CarouselPopularMovies, GridPopularMovies } from '../index';
 import { getPopularMovies } from '../../api/popularMovies';
 import { PopularMoviesContext } from '../../context';

@@ -7,3 +7,5 @@ export { FooterBody } from './FooterBody/FooterBody';
 export { DetailsMovies } from './DetailsMovies/DetailsMovies';
 export { CarouselPopularMovies } from './CarouselPopularMovies/CarouselPopularMovies';
 export { GridPopularMovies } from './GridPopularMovies/GridPopularMovies';
+export { NavBar } from './NavBar/NavBar';
+export { GridMovies } from './GridMovies/GridMovies';
