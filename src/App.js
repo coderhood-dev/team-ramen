@@ -8,7 +8,8 @@ import {
   FooterBody,
   DetailsMovies,
   FooterDetailsMovies,
-} from "./components";
+  Register,
+} from "./components/index";
 
 function App() {
   return (
@@ -30,6 +31,9 @@ function App() {
           <Header />
           <DetailsMovies />
           <FooterDetailsMovies />
+        </Route>
+        <Route exact path="/register">
+          <Register />
         </Route>
       </Switch>
     </Router>
