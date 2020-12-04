@@ -14,13 +14,15 @@ const Background = () => {
         h="100vh"
         objectFit="cover"
         src={backgroundImage}
-        zIndex="-100"></Image>
+        zIndex="-100"
+      ></Image>
       <Flex
         h="100vh"
         w="100vw"
         bg="rgba(1, 1, 1, 0.71)"
         position="absolute"
-        zIndex="-50"></Flex>
+        zIndex="-50"
+      ></Flex>
     </>
   );
 };
@@ -31,34 +33,39 @@ const Title = ({ children }) => {
       fontSize="2rem"
       fontWeight="bold"
       color="white"
-      marginBottom="1.37rem">
+      marginBottom="1.37rem"
+    >
       {children}
     </Text>
   );
 };
-const Input = ({ ph, title, onChange }) => {
+const Input = ({ ph, title, onChange, ...props }) => {
   return (
     <Flex direction="column">
       <Text
+        as="label"
         fontSize="1.5rem"
         fontWeight="normal"
         color="white"
         marginBottom="0.25rem"
-        boxShadow="lg">
+        boxShadow="lg"
+      >
         {title}
       </Text>
       <Flex
         background="white"
         border="5px solid #C53030"
         borderRadius="0.6rem"
-        boxShadow="lg">
+        boxShadow="lg"
+      >
         <ChakraInput
-          type="password"
           onChange={onChange}
           variant="unstyled"
           placeholder={ph}
           paddingX="0.5rem"
-          paddingY="0.25rem"></ChakraInput>
+          paddingY="0.25rem"
+          {...props}
+        ></ChakraInput>
       </Flex>
     </Flex>
   );
@@ -73,7 +80,8 @@ const ErrorDisplay = ({ error }) => {
             marginY="0.3rem"
             color="white"
             maxW="14rem"
-            textAlign="center">
+            textAlign="center"
+          >
             {error}
           </Text>
         )}
@@ -94,13 +102,15 @@ const RegisterButton = ({ handleSubmit }) => {
       borderRadius="6px 19px"
       boxShadow="lg"
       transition="all 0.2s cubic-bezier(.08,.52,.52,1)"
-      onClick={(e) => handleSubmit(e)}
-      _focus={{ transform: "scale(1.1)" }}>
+      onClick={handleSubmit}
+      _focus={{ transform: "scale(1.1)" }}
+    >
       <Text
         fontSize="1.12rem"
         fontWeight="bold"
         color="black"
-        textShadow="0px 4px 4px rgba(0, 0, 0, 0.25)">
+        textShadow="0px 4px 4px rgba(0, 0, 0, 0.25)"
+      >
         Registrarse
       </Text>
     </Flex>
@@ -115,7 +125,8 @@ const Login = ({ handleGoLogin }) => {
       as="button"
       textDecoration="underline"
       justifySelf="flex-end"
-      onClick={handleGoLogin}>
+      onClick={handleGoLogin}
+    >
       Inicia sesion
     </Text>
   );
@@ -130,19 +141,24 @@ const Form = ({
     <Flex as="form" direction="column">
       <Title>Registrate</Title>
       <Input
-        ph={"bautista@gmail.com"}
-        title={"Email"}
-        onChange={handleEmailChange}></Input>
+        ph="bautista@gmail.com"
+        title="Email"
+        onChange={handleEmailChange}
+      ></Input>
       <Box marginY="0.75rem"></Box>
       <Input
-        ph={"*********"}
-        title={"Contraseña"}
-        onChange={handlePasswordChange}></Input>
+        ph="Pepe1234"
+        type="password"
+        title="Contraseña"
+        onChange={handlePasswordChange}
+      ></Input>
       <Box marginY="0.75rem"></Box>
       <Input
-        ph={"*********"}
+        ph="Pepe1234"
+        type="password"
         title={"Repite la contraseña"}
-        onChange={handlePasswordRepeatChange}></Input>
+        onChange={handlePasswordRepeatChange}
+      ></Input>
       <Box marginY="1.34rem"></Box>
       <RegisterButton handleSubmit={handleSubmit} />
     </Flex>
@@ -210,14 +226,16 @@ export const Register = () => {
         variants={variants}
         initial="hidden"
         animate="visible"
-        exit="exit">
+        exit="exit"
+      >
         <Flex h="100vh" justifyContent="center" alignItems="center">
           <Flex justifyContent="center" direction="column">
             <Form
               handleEmailChange={handleEmailChange}
               handlePasswordChange={handlePasswordChange}
               handleSubmit={handleSubmit}
-              handlePasswordRepeatChange={handlePasswordRepeatChange}></Form>
+              handlePasswordRepeatChange={handlePasswordRepeatChange}
+            ></Form>
             <ErrorDisplay error={error} />
             <Login handleGoLogin={handleGoLogin} />
           </Flex>
