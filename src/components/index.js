@@ -9,3 +9,4 @@ export { CarouselPopularMovies } from './CarouselPopularMovies/CarouselPopularMo
 export { GridPopularMovies } from './GridPopularMovies/GridPopularMovies';
 export { NavBar } from './NavBar/NavBar';
 export { GridMovies } from './GridMovies/GridMovies';
+export { Image } from './Image/Image';

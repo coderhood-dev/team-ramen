@@ -57,6 +57,14 @@ export const NavBar = () => {
     <Select
       placeholder="Seleccione Genero de Peliculas"
       onChange={(e) => handleGenres(e.target.value)}
+      bg={` linear-gradient(180deg, rgba(0, 0, 0, 0.0092) 5.21%, rgba(0, 0, 0, 0.2852) 29.17%, rgba(0, 0, 0, 0.4554) 50.52%, rgba(0, 0, 0, 0.2852) 75%, rgba(0, 0, 0, 0) 100%), linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.0966) 30.21%, rgba(0, 0, 0, 0.115) 40.63%, rgba(0, 0, 0, 0.1794) 53.12%, rgba(0, 0, 0, 0.4554) 66.67%, rgba(0, 0, 0, 0.2714) 89.06%, rgba(0, 0, 0, 0) 100%), linear-gradient(180deg, rgba(0, 0, 0, 0.0092) 5.21%, rgba(0, 0, 0, 0.2852) 21.88%, rgba(0, 0, 0, 0.4554) 50.52%);
+box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25)`}
+      border="none"
+      color="#A72626"
+      fontFamily="Montserrat"
+      fontStyle="normal"
+      fontWeight="bold"
+      fontSize={{ base: '15px', md: '20px', lg: '24px' }}
     >
       <option value="Action">Acción</option>
       <option value="Adventure">Aventura</option>

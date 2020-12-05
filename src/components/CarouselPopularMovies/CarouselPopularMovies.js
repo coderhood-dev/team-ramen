@@ -1,27 +1,38 @@
-import React from "react";
-import Carousel from "react-elastic-carousel";
-import { useHistory } from "react-router-dom";
-import { Image, Heading, Flex } from "@chakra-ui/react";
+import React from 'react';
+import Carousel from 'react-elastic-carousel';
+import { useHistory } from 'react-router-dom';
+import { Heading, Flex, Box } from '@chakra-ui/react';
+import { Image } from '../index';
 
-import { PopularMoviesContext } from "../../context";
+import { PopularMoviesContext } from '../../context';
 
 export const CarouselPopularMovies = ({ movies }) => {
   const { setMovie } = React.useContext(PopularMoviesContext);
   const history = useHistory();
   return (
-    <div>
+    <Box>
       <Heading
-        color="white"
         as="h1"
-        fontSize={{ base: "24px", md: "40px", lg: "56px" }}
+        pl="1.63rem"
+        pt="1.63rem"
+        pb="1.63rem"
+        fontFamily="Montserrat"
+        fontStyle="normal"
+        fontWeight="bold"
+        color="#220707"
+        textShadow={`0.25rem 0.25rem 0.25rem rgba(0, 0, 0, 0.25)`}
+        fontSize={{ base: '1rem', md: '1.25rem', lg: '2rem' }}
       >
         Peliculas populares
       </Heading>
       <Flex justify="center" align="center">
-        <Carousel itemsToShow={6}>
+        <Carousel itemsToShow={6} heigth="25rem">
           {movies.map((movie) => {
             return (
               <Image
+                w="11.56rem"
+                h="25rem"
+                cursor="pointer"
                 key={movie.id}
                 src={`https://image.tmdb.org/t/p/original${movie.poster_path}`}
                 alt={movie.title}
@@ -34,6 +45,6 @@ export const CarouselPopularMovies = ({ movies }) => {
           })}
         </Carousel>
       </Flex>
-    </div>
+    </Box>
   );
 };

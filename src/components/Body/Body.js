@@ -1,10 +1,10 @@
-import React from "react";
-import { Flex, Text, Spinner, Box, useMediaQuery } from "@chakra-ui/react";
-import { CarouselPopularMovies, GridPopularMovies } from "../index";
-import { getPopularMovies } from "../../api/popularMovies";
+import React from 'react';
+import { Flex, Text, Spinner, Box, useMediaQuery } from '@chakra-ui/react';
+import { CarouselPopularMovies, GridPopularMovies } from '../index';
+import { getPopularMovies } from '../../api/popularMovies';
 
 export const Body = () => {
-  const [isLargerThan780] = useMediaQuery("(min-width: 780px)");
+  const [isLargerThan780] = useMediaQuery('(min-width: 780px)');
   const [loading, setLoading] = React.useState(false);
   const [movies, setMovies] = React.useState([]);
   const [error, setError] = React.useState(null);
@@ -39,7 +39,10 @@ export const Body = () => {
   }
 
   return (
-    <Box bg=" linear-gradient(180deg, rgba(0, 0, 0, 0.97) 0.01%, #0B0202 96.87%)">
+    <Box
+      bg={`linear-gradient(180deg, #AF1B1B 2.09%, #470909 90.11%)`}
+      minH="31.50rem"
+    >
       {isLargerThan780 ? (
         <CarouselPopularMovies movies={movies} />
       ) : (
