@@ -1,6 +1,7 @@
 import React from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import { PopularMoviesContext } from "./context";
+import { Flex } from "@chakra-ui/react";
 import {
   Header,
   Body,
@@ -11,6 +12,9 @@ import {
   FooterDetailsMovies,
   NavBar,
   GridMovies,
+  Login,
+  Register,
+  Profile,
 } from "./components/index";
 
 function App() {
@@ -26,9 +30,11 @@ function App() {
             <FooterBody />
           </Route>
           <Route exact path="/about">
-            <Header />
-            <About />
-            <FooterAbout />
+            <Flex direction="column" h="100vh" fontSize="1rem">
+              <Header />
+              <About />
+              <FooterAbout />
+            </Flex>
           </Route>
           <Route exact path="/details/:id">
             <Header />
@@ -39,6 +45,16 @@ function App() {
             <Header />
             <NavBar />
             <GridMovies />
+          </Route>
+          <Route exact path="/profile">
+            <Header />
+            <Profile />
+          </Route>
+          <Route exact path="/login">
+            <Login />
+          </Route>
+          <Route exact path="/register">
+            <Register />
           </Route>
         </Switch>
       </Router>
