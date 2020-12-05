@@ -138,7 +138,7 @@ export const GridMovies = () => {
         {movies.map((movie) => {
           return (
             <Image
-              w="10.31rem"
+              w="100%"
               h="17.50rem"
               cursor="pointer"
               key={movie.id}
