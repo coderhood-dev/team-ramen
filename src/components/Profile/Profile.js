@@ -17,7 +17,7 @@ const Background = () => {
   );
 };
 
-const ProfileName = ({ ...props }) => {
+const ProfileName = ({ name }) => {
   return (
     <Text
       alignSelf="center"
@@ -27,7 +27,7 @@ const ProfileName = ({ ...props }) => {
       fontSize="2rem"
       marginBottom="3.37rem"
     >
-      Hola {props.children}!
+      Hola {name}!
     </Text>
   );
 };
@@ -69,6 +69,10 @@ const Button = ({ handleButtonPress, children, route }) => {
 export const Profile = () => {
   const history = useHistory();
 
+  //dummie user
+  const user = { id: 2801, name: "Pedro" };
+  const { name } = user;
+
   const handleButtonPress = (e, route) => {
     e.preventDefault();
     history.push(route);
@@ -100,7 +104,7 @@ export const Profile = () => {
         exit="exit"
       >
         <Flex direction="column" marginTop="6.87rem" overflowX="scroll">
-          <ProfileName>Lucas</ProfileName>
+          <ProfileName name={name} />
           <Button route="/login" handleButtonPress={handleButtonPress}>
             Historial de compra
           </Button>
