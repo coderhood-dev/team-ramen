@@ -12,7 +12,7 @@ export const Image = (props) => {
       <ChakraImage onLoad={handleOnLoad} {...props} />
       {loading && (
         <Flex
-          width={props.w}
+          width="1,5rem"
           height={props.h}
           position="absolute"
           justify="center"
