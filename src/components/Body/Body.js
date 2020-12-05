@@ -39,9 +39,7 @@ export const Body = () => {
   }
 
   return (
-    <Box
-      bg={`linear-gradient(180deg, #AF1B1B 2.09%, #470909 90.11%)`}
-      minH="31.50rem">
+    <Box minH="31.50rem">
       {isLargerThan780 ? (
         <CarouselPopularMovies movies={movies} />
       ) : (

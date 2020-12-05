@@ -4,17 +4,16 @@ import { PopularMoviesContext } from "./context";
 import { Flex } from "@chakra-ui/react";
 import {
   Header,
-  Body,
   About,
   FooterAbout,
-  FooterBody,
   DetailsMovies,
   FooterDetailsMovies,
-  NavBar,
   GridMovies,
   Login,
   Register,
   Profile,
+  NavBar,
+  Home,
 } from "./components/index";
 
 function App() {
@@ -24,10 +23,7 @@ function App() {
       <Router>
         <Switch>
           <Route exact path="/">
-            <Header />
-            <NavBar />
-            <Body />
-            <FooterBody />
+            <Home />
           </Route>
           <Route exact path="/about">
             <Flex direction="column" h="100vh" fontSize="1rem">
