@@ -8,3 +8,4 @@ export { DetailsMovies } from "./DetailsMovies/DetailsMovies";
 export { Login } from "./Login/Login";
 export { Register } from "./Register/Register";
 export { Profile } from "./Profile/Profile";
+export { History } from "./History/History";

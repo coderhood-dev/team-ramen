@@ -11,6 +11,7 @@ import {
   Login,
   Register,
   Profile,
+  History,
 } from "./components/index";
 
 function App() {
@@ -43,6 +44,9 @@ function App() {
         </Route>
         <Route exact path="/register">
           <Register />
+        </Route>
+        <Route exact path="/history">
+          <History />
         </Route>
       </Switch>
     </Router>
