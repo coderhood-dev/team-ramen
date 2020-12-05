@@ -10,6 +10,7 @@ import {
   FooterDetailsMovies,
   Login,
   Register,
+  Profile,
 } from "./components/index";
 
 function App() {
@@ -32,6 +33,10 @@ function App() {
           <Header />
           <DetailsMovies />
           <FooterDetailsMovies />
+        </Route>
+        <Route exact path="/profile">
+          <Header />
+          <Profile />
         </Route>
         <Route exact path="/login">
           <Login />
