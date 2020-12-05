@@ -8,6 +8,7 @@ import {
   FooterBody,
   DetailsMovies,
   FooterDetailsMovies,
+  Login,
   Register,
 } from "./components/index";
 
@@ -31,6 +32,9 @@ function App() {
           <Header />
           <DetailsMovies />
           <FooterDetailsMovies />
+        </Route>
+        <Route exact path="/login">
+          <Login />
         </Route>
         <Route exact path="/register">
           <Register />
