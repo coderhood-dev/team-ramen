@@ -71,7 +71,7 @@ const Input = ({ ph, title, onChange, ...props }) => {
 };
 const ErrorDisplay = ({ error }) => {
   return (
-    <Flex h="7rem" justifyContent="center" align="flex-start">
+    <Flex h="6rem" justifyContent="center" align="flex-start">
       <Box marginTop="1.5rem" bg="red.400" borderRadius="10px">
         {error && (
           <Text
@@ -131,7 +131,7 @@ const Register = ({ handleGoRegister }) => {
 };
 const Form = ({ handleSubmit, handleEmailChange, handlePasswordChange }) => {
   return (
-    <Flex as="form" direction="column">
+    <Flex as="form" direction="column" marginTop="4rem">
       <Title>Inicia sesion</Title>
       <Input
         ph="bautista@gmail.com"
@@ -209,6 +209,7 @@ export const Login = () => {
           justifyContent="center"
           alignItems="center"
           flexDir="column"
+          overflowX="scroll"
         >
           <Form
             handleEmailChange={handleEmailChange}
