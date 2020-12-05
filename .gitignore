@@ -21,6 +21,10 @@
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
-.eslintrc
 .prettierignore
+.eslintrc
+.gitignore
 .prettierrc.json
+.eslintcache
+.gitignore
+.eslintcache
