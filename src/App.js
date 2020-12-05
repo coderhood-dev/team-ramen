@@ -1,20 +1,18 @@
-import React from "react";
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
-import { PopularMoviesContext } from "./context";
-import { Flex } from "@chakra-ui/react";
+import React from 'react';
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import { PopularMoviesContext } from './context';
+import { Flex } from '@chakra-ui/react';
 import {
   Header,
   About,
   FooterAbout,
-  DetailsMovies,
-  FooterDetailsMovies,
-  GridMovies,
   Login,
   Register,
   Profile,
-  NavBar,
+  Genre,
   Home,
-} from "./components/index";
+  DetailMovie,
+} from './components/index';
 
 function App() {
   const [movie, setMovie] = React.useState(undefined);
@@ -33,14 +31,10 @@ function App() {
             </Flex>
           </Route>
           <Route exact path="/details/:id">
-            <Header />
-            <DetailsMovies />
-            <FooterDetailsMovies />
+            <DetailMovie />
           </Route>
           <Route exact path="/genre/:id">
-            <Header />
-            <NavBar />
-            <GridMovies />
+            <Genre />
           </Route>
           <Route exact path="/profile">
             <Header />
