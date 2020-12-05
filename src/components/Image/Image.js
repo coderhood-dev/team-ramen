@@ -8,7 +8,7 @@ export const Image = (props) => {
     isLoading(false);
   };
   return (
-    <Flex bg="black" width={props.w} height={props.h}>
+    <Flex bg="black" width={props.w} height="17.40rem">
       <ChakraImage onLoad={handleOnLoad} {...props} />
       {loading && (
         <Flex
