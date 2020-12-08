@@ -1,4 +1,4 @@
-import { Flex, Image, Text } from "@chakra-ui/react";
+import { Flex, Text } from "@chakra-ui/react";
 import { motion } from "framer-motion";
 import { useHistory } from "react-router-dom";
 import { HiOutlineArrowCircleLeft } from "react-icons/hi";
@@ -11,8 +11,7 @@ const Background = () => {
         w="100vw"
         bg="linear-gradient(180deg, #2D0101 2.09%, #600505 78.14%, #4B0404 102.09%)"
         position="fixed"
-        zIndex="-100"
-      ></Flex>
+        zIndex="-100"></Flex>
     </>
   );
 };
@@ -30,8 +29,7 @@ const BackButton = ({ handleGoBack }) => {
       justifyContent="center"
       align="center"
       as="button"
-      onClick={handleGoBack}
-    >
+      onClick={handleGoBack}>
       <HiOutlineArrowCircleLeft style={{ color: "black", fontSize: "3rem" }} />
     </Flex>
   );
@@ -45,14 +43,12 @@ const Title = ({ ...props }) => {
       color="white"
       fontSize="1.75rem"
       marginBottom="3.37rem"
-      maxW="auto"
-    >
+      maxW="auto">
       Las funciones que compraste
     </Text>
   );
 };
-
-const Film = () => {
+const Film = ({ children }) => {
   const film = {
     title: "Capitan america",
     price: "400",
@@ -61,24 +57,27 @@ const Film = () => {
       "https://www.cinemascomics.com/wp-content/uploads/2014/03/Capitan-America-el-Soldado-de-invierno.jpg",
   };
   return (
-    <Flex h="4.62rem" justifyContent="space-between">
-      <Image
-        borderRadius="36px 10px"
-        src={film.img}
-        h="4.62rem"
-        w="80%"
-        fit="cover"
-        position="absolute"
-        zIndex="-50"
-      ></Image>
-      <Flex borderRadius="36px 10px" bg="rgba(0, 0, 0, 0.61)" h="100%" w="100%">
-        HOLA
-      </Flex>
+    <Flex
+      borderRadius="36px 10px"
+      bg="rgba(0, 0, 0, 0.61)"
+      h="4.62rem"
+      maxW="20rem"
+      boxShadow="lg"
+      minW="15rem"
+      color="pink.200">
+      {children}
     </Flex>
   );
 };
 
 export const History = () => {
+  const history = useHistory();
+
+  const handleGoBack = (e) => {
+    e.preventDefault();
+    history.push("/profile");
+  };
+
   const variants = {
     hidden: {
       opacity: 0,
@@ -95,26 +94,36 @@ export const History = () => {
       transition: { duration: 0.1, type: "spring", stiffness: 100 },
     },
   };
+
+  const peliculas = ["Sherk 1", "Sherk 2", "Sherk 3"];
+
+  function recorrerPeliculas(pelicula) {
+    return <Film>{pelicula}</Film>;
+  }
+
   return (
-    <Flex overflowX="hidden" justifyContent="center">
-      <Background />
+    <Flex overflowX="hidden" justifyContent="center" w="100vw">
+      <Background></Background>
       <motion.div
         variants={variants}
         initial="hidden"
         animate="visible"
-        exit="exit"
-      >
-        <Flex direction="column" marginTop="6.87rem" overflowX="scroll">
+        exit="exit">
+        <Flex
+          alignItems="center"
+          direction="column"
+          marginTop="6.87rem"
+          overflowY="scroll"
+          w="100%">
           <Flex
             direction={["column", "row"]}
             justifyContent="center"
-            maxW="80vw"
-          >
-            <BackButton />
+            maxW="80vw">
+            <BackButton handleGoBack={handleGoBack} />
             <Title />
           </Flex>
-          <Flex direction="column" justifyContent="center">
-            <Film></Film>
+          <Flex direction="column" alignItems="center" maxW="80vw">
+            {peliculas.map(recorrerPeliculas)}
           </Flex>
         </Flex>
       </motion.div>
