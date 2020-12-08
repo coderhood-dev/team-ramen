@@ -1,5 +1,6 @@
 import { Flex } from "@chakra-ui/react";
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import { Switch, Route, useLocation } from "react-router-dom";
+import { AnimatePresence } from "framer-motion";
 import {
   Header,
   Body,
@@ -17,11 +18,12 @@ import { useState } from "react";
 
 function App() {
   const [actualUser, setActualUser] = useState(undefined);
+  const location = useLocation();
 
   return (
     <ActualUser.Provider value={(actualUser, setActualUser)}>
-      <Router>
-        <Switch>
+      <AnimatePresence exitBeforeEnter>
+        <Switch location={location} key={location.key}>
           <Route exact path="/">
             <Header />
             <Body />
@@ -50,7 +52,7 @@ function App() {
             <Register />
           </Route>
         </Switch>
-      </Router>
+      </AnimatePresence>
     </ActualUser.Provider>
   );
 }
