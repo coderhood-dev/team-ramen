@@ -1,73 +1,30 @@
-import React from "react";
-import { Select } from "@chakra-ui/react";
-import { useHistory } from "react-router-dom";
+import React from 'react';
+import { Select } from '@chakra-ui/react';
+import { useHistory } from 'react-router-dom';
+import { getGenderByName } from '../../utils/getGenderByName';
 
 export const NavBar = () => {
   const history = useHistory();
-  const handleGenres = (genre) => {
-    switch (genre) {
-      case "Action":
-        history.push(`/genre/28`);
-        break;
-      case "Adventure":
-        history.push(`/genre/12`);
-        break;
-      case "Animation":
-        history.push(`/genre/16`);
-        break;
-      case "Comedy":
-        history.push(`/genre/35`);
-        break;
-      case "Crime":
-        history.push(`/genre/80`);
-        break;
-      case "Documentary":
-        history.push(`/genre/99`);
-        break;
-      case "Drama":
-        history.push(`/genre/18`);
-        break;
-      case "Family":
-        history.push(`/genre/10751`);
-        break;
-      case "Fantasy":
-        history.push(`/genre/14`);
-        break;
-      case "History":
-        history.push(`/genre/36`);
-        break;
-      case "Horror":
-        history.push(`/genre/27`);
-        break;
-      case "Romance":
-        history.push(`/genre/10749`);
-        break;
-      case "Science_Fiction":
-        history.push(`/genre/878`);
-        break;
-      case "War":
-        history.push(`/genre/10752`);
-        break;
-      default:
-        history.push(`/`);
-        break;
-    }
+  const handleGenders = (gender) => {
+    const genderId = getGenderByName(gender);
+    history.push(`/genre/${genderId}`);
   };
   return (
     <Select
       display="flex"
       alignSelf="center"
       placeholder="Categorias"
-      onChange={(e) => handleGenres(e.target.value)}
+      onChange={(e) => handleGenders(e.target.value)}
       bg={` linear-gradient(180deg, rgba(0, 0, 0, 0.0092) 5.21%, rgba(0, 0, 0, 0.2852) 29.17%, rgba(0, 0, 0, 0.4554) 50.52%, rgba(0, 0, 0, 0.2852) 75%, rgba(0, 0, 0, 0) 100%), linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.0966) 30.21%, rgba(0, 0, 0, 0.115) 40.63%, rgba(0, 0, 0, 0.1794) 53.12%, rgba(0, 0, 0, 0.4554) 66.67%, rgba(0, 0, 0, 0.2714) 89.06%, rgba(0, 0, 0, 0) 100%), linear-gradient(180deg, rgba(0, 0, 0, 0.0092) 5.21%, rgba(0, 0, 0, 0.2852) 21.88%, rgba(0, 0, 0, 0.4554) 50.52%);`}
       border="none"
       color="#A72626"
       fontFamily="Montserrat"
       fontStyle="normal"
       fontWeight="bold"
-      fontSize={{ base: "2rem", md: "1.25rem", lg: "1.5rem" }}
+      fontSize={{ base: '2rem', md: '1.25rem', lg: '1.5rem' }}
       minH="4.81rem"
-      maxW="89%">
+      maxW="89%"
+    >
       <option value="Action">Acción</option>
       <option value="Adventure">Aventura</option>
       <option value="Animation">Animación </option>

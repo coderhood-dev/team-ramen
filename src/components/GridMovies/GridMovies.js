@@ -13,12 +13,12 @@ import {
 import { getGenresMovies } from '../../api/genresMovies';
 import { PopularMoviesContext } from '../../context';
 import { Image } from '../index';
+import { getGenderById } from '../../utils/getGenderById';
 
 export const GridMovies = () => {
   const { setMovie } = React.useContext(PopularMoviesContext);
   const history = useHistory();
   let column = 2;
-  let TitleGenrer = 'Romantico';
   const [isLargerThan780] = useMediaQuery('(min-width: 780px)');
   const { id } = useParams();
   const [page, setPage] = React.useState(1);
@@ -27,7 +27,7 @@ export const GridMovies = () => {
   const [error, setError] = React.useState(null);
 
   React.useEffect(() => {
-    const doFetchCharacters = async () => {
+    const doFetchGenresMovies = async () => {
       setLoading(true);
       setError(null);
       setMovies([]);
@@ -42,7 +42,7 @@ export const GridMovies = () => {
         setError(e.message);
       }
     };
-    doFetchCharacters();
+    doFetchGenresMovies();
   }, [page, id]);
 
   if (loading) {
@@ -55,11 +55,11 @@ export const GridMovies = () => {
     return <Text>{error}</Text>;
   }
 
-  const ChangeNextPage = () => {
+  const changeNextPage = () => {
     setPage(page + 1);
   };
 
-  const ChangePreviusPage = () => {
+  const changePreviusPage = () => {
     if (page !== 1) {
       setPage(page - 1);
     }
@@ -70,55 +70,7 @@ export const GridMovies = () => {
   } else {
     column = 2;
   }
-
-  switch (id) {
-    case '28':
-      TitleGenrer = 'Acción';
-      break;
-    case '12':
-      TitleGenrer = 'Aventura';
-      break;
-    case '16':
-      TitleGenrer = 'Animación';
-      break;
-    case '35':
-      TitleGenrer = 'Comedia';
-      break;
-    case '80':
-      TitleGenrer = 'Crimen';
-      break;
-    case '99':
-      TitleGenrer = 'Documental';
-      break;
-    case '18':
-      TitleGenrer = 'Drama';
-      break;
-    case '10751':
-      TitleGenrer = 'Familiar';
-      break;
-    case '14':
-      TitleGenrer = 'Fantasía';
-      break;
-    case '36':
-      TitleGenrer = 'Historia';
-      break;
-    case '27':
-      TitleGenrer = 'Terror';
-      break;
-    case '10749':
-      TitleGenrer = 'Romance';
-      break;
-    case '878':
-      TitleGenrer = 'Ciencia Ficción';
-      break;
-    case '10752':
-      TitleGenrer = 'Guerra';
-      break;
-    default:
-      TitleGenrer = 'No hay pelicula';
-      break;
-  }
-
+  const genderName = getGenderById(id);
   return (
     <Box bg={`linear-gradient(180deg, #AF1B1B 2.09%, #470909 90.11%)`}>
       <Heading
@@ -132,7 +84,7 @@ export const GridMovies = () => {
         textShadow={`0rem 0.25rem 0.25rem rgba(0, 0, 0, 0.25)`}
         fontSize={{ base: '1.57rem', md: '1.57rem', lg: '2rem' }}
       >
-        Peliculas de {TitleGenrer}
+        Peliculas de {genderName}
       </Heading>
       <Grid p="1.25rem" templateColumns={`repeat(${column} , 1fr)`} gap={3}>
         {movies.map((movie) => {
@@ -155,7 +107,7 @@ export const GridMovies = () => {
       <Flex align="center" justify="center">
         <Button
           color="#A72626"
-          onClick={() => ChangePreviusPage()}
+          onClick={() => changePreviusPage()}
           w="12.5rem"
           mr="1rem"
           colorScheme={` linear-gradient(180deg, rgba(0, 0, 0, 0.0092) 5.21%, rgba(0, 0, 0, 0.2852) 29.17%, rgba(0, 0, 0, 0.4554) 50.52%, rgba(0, 0, 0, 0.2852) 75%, rgba(0, 0, 0, 0) 100%), linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.0966) 30.21%, rgba(0, 0, 0, 0.115) 40.63%, rgba(0, 0, 0, 0.1794) 53.12%, rgba(0, 0, 0, 0.4554) 66.67%, rgba(0, 0, 0, 0.2714) 89.06%, rgba(0, 0, 0, 0) 100%), linear-gradient(180deg, rgba(0, 0, 0, 0.0092) 5.21%, rgba(0, 0, 0, 0.2852) 21.88%, rgba(0, 0, 0, 0.4554) 50.52%);
@@ -166,7 +118,7 @@ box-shadow:  0rem 0.25rem 0.25rem rgba(0, 0, 0, 0.25)`}
         </Button>
         <Button
           color="#A72626"
-          onClick={() => ChangeNextPage()}
+          onClick={() => changeNextPage()}
           w="12.5rem"
           colorScheme={` linear-gradient(180deg, rgba(0, 0, 0, 0.0092) 5.21%, rgba(0, 0, 0, 0.2852) 29.17%, rgba(0, 0, 0, 0.4554) 50.52%, rgba(0, 0, 0, 0.2852) 75%, rgba(0, 0, 0, 0) 100%), linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.0966) 30.21%, rgba(0, 0, 0, 0.115) 40.63%, rgba(0, 0, 0, 0.1794) 53.12%, rgba(0, 0, 0, 0.4554) 66.67%, rgba(0, 0, 0, 0.2714) 89.06%, rgba(0, 0, 0, 0) 100%), linear-gradient(180deg, rgba(0, 0, 0, 0.0092) 5.21%, rgba(0, 0, 0, 0.2852) 21.88%, rgba(0, 0, 0, 0.4554) 50.52%);
 box-shadow:  0rem 0.25rem 0.25rem  rgba(0, 0, 0, 0.25)`}
