@@ -1,13 +1,8 @@
-import React from 'react';
-import {
-  BrowserRouter as Router,
-  Switch,
-  Route,
-  useLocation,
-} from 'react-router-dom';
-import { PopularMoviesContext } from './context';
-import { Flex } from '@chakra-ui/react';
-import { AnimatePresence } from 'framer-motion';
+import React from "react";
+import { Switch, Route, useLocation } from "react-router-dom";
+import { PopularMoviesContext } from "./context";
+import { Flex } from "@chakra-ui/react";
+import { AnimatePresence } from "framer-motion";
 import {
   Header,
   About,
@@ -18,14 +13,14 @@ import {
   Genre,
   Home,
   DetailMovie,
-} from './components/index';
+} from "./components/index";
 
 function App() {
   const [movie, setMovie] = React.useState(undefined);
   const location = useLocation();
   return (
-    <AnimatePresence exitBeforeEnter>
-      <PopularMoviesContext.Provider value={{ movie, setMovie }}>
+    <PopularMoviesContext.Provider value={{ movie, setMovie }}>
+      <AnimatePresence exitBeforeEnter>
         <Switch location={location} key={location.key}>
           <Route exact path="/">
             <Home />
@@ -54,8 +49,8 @@ function App() {
             <Register />
           </Route>
         </Switch>
-      </PopularMoviesContext.Provider>
-    </AnimatePresence>
+      </AnimatePresence>
+    </PopularMoviesContext.Provider>
   );
 }
 
