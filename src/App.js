@@ -16,9 +16,12 @@ import {
 import { UserContext } from "./context/user";
 import { useState } from "react";
 
+import { useAuth } from "./hooks/useAuth";
+
 function App() {
   const [user, setUser] = useState(null);
   const location = useLocation();
+  const { addpurchasedfilm } = useAuth();
 
   return (
     <UserContext.Provider value={{ user, setUser }}>
@@ -28,9 +31,18 @@ function App() {
             <Header />
             <Body />
             <button
+              style={{ marginTop: "5rem" }}
               onClick={(e) => {
                 e.preventDefault();
-                console.log(user);
+                console.log("user", user);
+                addpurchasedfilm(user, { tile: "cap", price: 400 })
+                  .then((u) => {
+                    console.log(u);
+                  })
+                  .catch((e) => {
+                    console.log(e);
+                    //setLoading(false);
+                  });
               }}>
               user
             </button>
