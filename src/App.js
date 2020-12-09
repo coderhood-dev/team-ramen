@@ -13,20 +13,27 @@ import {
   Register,
   Profile,
 } from "./components/index";
-import { ActualUser } from "./context";
+import { UserContext } from "./context/user";
 import { useState } from "react";
 
 function App() {
-  const [actualUser, setActualUser] = useState(undefined);
+  const [user, setUser] = useState(null);
   const location = useLocation();
 
   return (
-    <ActualUser.Provider value={(actualUser, setActualUser)}>
+    <UserContext.Provider value={{ user, setUser }}>
       <AnimatePresence exitBeforeEnter>
         <Switch location={location} key={location.key}>
           <Route exact path="/">
             <Header />
             <Body />
+            <button
+              onClick={(e) => {
+                e.preventDefault();
+                console.log(user);
+              }}>
+              user
+            </button>
             <FooterBody />
           </Route>
           <Route exact path="/about">
@@ -53,7 +60,7 @@ function App() {
           </Route>
         </Switch>
       </AnimatePresence>
-    </ActualUser.Provider>
+    </UserContext.Provider>
   );
 }
 
