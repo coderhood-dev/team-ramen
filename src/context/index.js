@@ -1,0 +1,1 @@
+export { PopularMoviesContext } from './popularMovies';
