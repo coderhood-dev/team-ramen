@@ -14,6 +14,7 @@ const Background = () => {
       <Image
         position="absolute"
         h="100vh"
+        w="100vw"
         objectFit="cover"
         src={backgroundImage}
         zIndex="-100"></Image>
@@ -128,10 +129,13 @@ const Form = ({
   handleEmailChange,
   handlePasswordChange,
   handlePasswordRepeatChange,
+  handleNameChange,
 }) => {
   return (
-    <Flex as="form" direction="column">
+    <Flex as="form" direction="column" marginTop="4rem">
       <Title>Registrate</Title>
+      <Input ph="Bautista" title="Nombre" onChange={handleNameChange}></Input>
+      <Box marginY="0.75rem"></Box>
       <Input
         ph="bautista@gmail.com"
         title="Email"
@@ -154,6 +158,7 @@ const Form = ({
   );
 };
 export const Register = () => {
+  const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [passwordRepeat, setPasswordRepeat] = useState("");
@@ -168,6 +173,7 @@ export const Register = () => {
     setError("");
 
     const user = {
+      name,
       email,
       password,
       passwordRepeat,
@@ -185,6 +191,9 @@ export const Register = () => {
       });
   };
 
+  const handleNameChange = (event) => {
+    setName(event.target.value);
+  };
   const handleEmailChange = (event) => {
     setEmail(event.target.value);
   };
@@ -219,23 +228,26 @@ export const Register = () => {
   };
 
   return (
-    <Flex overflowX="hidden" justifyContent="center">
+    <Flex overflowX="hidden" justifyContent="center" h="100vh">
       <Background></Background>
       <motion.div
         variants={variants}
         initial="hidden"
         animate="visible"
         exit="exit">
-        <Flex h="100vh" justifyContent="center" alignItems="center">
-          <Flex justifyContent="center" direction="column">
-            <Form
-              handleEmailChange={handleEmailChange}
-              handlePasswordChange={handlePasswordChange}
-              handleSubmit={handleSubmit}
-              handlePasswordRepeatChange={handlePasswordRepeatChange}></Form>
-            <ErrorDisplay error={error} />
-            <Login handleGoLogin={handleGoLogin} />
-          </Flex>
+        <Flex
+          h="100%"
+          justifyContent="flex-start"
+          flexDir="column"
+          overflowX="scroll">
+          <Form
+            handleEmailChange={handleEmailChange}
+            handlePasswordChange={handlePasswordChange}
+            handleSubmit={handleSubmit}
+            handlePasswordRepeatChange={handlePasswordRepeatChange}
+            handleNameChange={handleNameChange}></Form>
+          <ErrorDisplay error={error} />
+          <Login handleGoLogin={handleGoLogin} />
         </Flex>
       </motion.div>
     </Flex>

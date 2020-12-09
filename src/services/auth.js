@@ -27,16 +27,15 @@ export const doSignup = async (users, setUsers, user) => {
 
   //chequeo que el email no este registrado
   const storedUser = users.find((u) => u.email === user.email);
-  if (storedUser) {
-    errors.push("El email ya esta registrado");
-  }
-  //chequeo que las paswords coincidan
-  if (user.password !== user.passwordRepeat)
-    errors.push("Las contraseñas no coinciden");
+  if (storedUser) errors.push("El email ya esta registrado");
 
   //chequeo que la contrasena tenga al menos 6 caracteres
   if (user.password.length < 6)
     errors.push("La contraseña debe tener al menos 6 caracteres");
+
+  //chequeo que las paswords coincidan
+  if (user.password !== user.passwordRepeat)
+    errors.push("Las contraseñas no coinciden");
 
   // chequeo si complete los campos requeridos, sino devuelvo un array con los errores
   Object.entries(user).forEach((element) => {
