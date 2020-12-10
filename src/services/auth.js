@@ -22,7 +22,7 @@ export const doSignin = async (users, email, password) => {
 
 export const doSignup = async (users, setUsers, user) => {
   // estos van a ser mis campos requeridos, todo servicio de autentificacion siempre va a tener campos requeridos
-  const fieldsRequired = ["email", "password"];
+  const fieldsRequired = ["email", "password", "name"];
   const errors = [];
 
   //chequeo que el email no este registrado
@@ -48,12 +48,21 @@ export const doSignup = async (users, setUsers, user) => {
     }
   });
 
+  const newUser = {
+    name: user.name,
+    email: user.email,
+    password: user.password,
+    totalSpent: 0,
+    filmsPurchased: [],
+    wishedFilms: [],
+  };
+
   if (errors.length > 0) {
     await sleep(1000);
     return Promise.reject(errors);
   } else {
     await sleep();
-    setUsers([...users, { email: user.email, password: user.password }]);
+    setUsers([...users, newUser]);
   }
 
   // toda async function retorna una promesa, eso significa que esta funcion retorna una promesa, en el caso de haber errores esta promesa se rechaza y devuelve los errores y en el caso que este todo bien se resuelve despues de 2000ms

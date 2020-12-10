@@ -3,6 +3,9 @@ import { sleep } from "../utils/sleep";
 // user = usuario logeado, se pasa por parametro
 
 export const doAddPurchasedFilm = async (setUsers, users, user, film) => {
+  if (typeof film.price === "string") {
+    film.price = parseInt(film.price, 10);
+  }
   const errors = [];
   if (!user) return Promise.reject("Debes estar logeado primero");
 
@@ -12,11 +15,16 @@ export const doAddPurchasedFilm = async (setUsers, users, user, film) => {
   if (!storedUser)
     errors.push("No se ha encontrado tu usuario en la base de datos");
 
-  const newUser = {
-    ...user,
-    film: film,
-  };
-  users[index] = newUser;
+  !user.totalSpent
+    ? (user.totalSpent = 400)
+    : (user.totalSpent = user.totalSpent + film.price);
+  if (user.purchasedFilm) user.purchasedFilm.push(film);
+  else {
+    user.purchasedFilm = [];
+    user.purchasedFilm.push(film);
+  }
+
+  users[index] = user;
   setUsers([...users]);
   // si llega hasta aca, significa que la promesa se resuelve bien
   if (errors.length > 0) {
@@ -24,45 +32,119 @@ export const doAddPurchasedFilm = async (setUsers, users, user, film) => {
     return Promise.reject(errors);
   } else {
     await sleep(2000);
-    return newUser;
+    return user;
   }
 };
 
-export const doAddWishedFilm = async (setUsers, users, user) => {
-  // estos van a ser mis campos requeridos, todo servicio de autentificacion siempre va a tener campos requeridos
-  const fieldsRequired = ["email", "password"];
+export const doAddWishedFilm = async (setUsers, users, user, film) => {
   const errors = [];
+  if (!user) return Promise.reject("Debes estar logeado primero");
 
-  //chequeo que el email no este registrado
   const storedUser = users.find((u) => u.email === user.email);
-  if (storedUser) errors.push("El email ya esta registrado");
+  const index = users.indexOf(storedUser, 0);
 
-  //chequeo que la contrasena tenga al menos 6 caracteres
-  if (user.password.length < 6)
-    errors.push("La contraseña debe tener al menos 6 caracteres");
+  if (!storedUser)
+    errors.push("No se ha encontrado tu usuario en la base de datos");
 
-  //chequeo que las paswords coincidan
-  if (user.password !== user.passwordRepeat)
-    errors.push("Las contraseñas no coinciden");
-
-  // chequeo si complete los campos requeridos, sino devuelvo un array con los errores
-  Object.entries(user).forEach((element) => {
-    const [key, value] = element;
-    const isFieldRequired = fieldsRequired.includes(key);
-
-    if (!value && isFieldRequired) {
-      const error = `${key} is required`;
-      errors.push(error);
-    }
-  });
-
-  if (errors.length > 0) {
-    await sleep(1000);
-    return Promise.reject(errors);
-  } else {
-    await sleep();
-    setUsers([...users, { email: user.email, password: user.password }]);
+  if (user.wishedFilms) user.wishedFilms.push(film);
+  else {
+    user.wishedFilms = [];
+    user.wishedFilms.push(film);
   }
 
-  // toda async function retorna una promesa, eso significa que esta funcion retorna una promesa, en el caso de haber errores esta promesa se rechaza y devuelve los errores y en el caso que este todo bien se resuelve despues de 2000ms
+  users[index] = user;
+  setUsers([...users]);
+  // si llega hasta aca, significa que la promesa se resuelve bien
+  if (errors.length > 0) {
+    await sleep(2000);
+    return Promise.reject(errors);
+  } else {
+    await sleep(2000);
+    return user;
+  }
+};
+
+export const doRemoveWishedFilm = async (setUsers, users, user, film) => {
+  const errors = [];
+  if (!user) return Promise.reject("Debes estar logeado primero");
+
+  const storedUser = users.find((u) => u.email === user.email);
+  const index = users.indexOf(storedUser, 0);
+
+  if (!storedUser)
+    errors.push("No se ha encontrado tu usuario en la base de datos");
+
+  if (user.wishedFilms) {
+    //eliminar la pelicula
+    const storedFilm = user.wishedFilms.find((f) => f.title === film.title);
+    const i = user.wishedFilms.indexOf(storedFilm, 0);
+    console.log(i);
+    if (i > -1) user.wishedFilms.splice(i, 1);
+  } else {
+    //no existian peliculas, no eliminar nada :)
+    user.wishedFilms = [];
+  }
+
+  users[index] = user;
+  setUsers([...users]);
+  // si llega hasta aca, significa que la promesa se resuelve bien
+  if (errors.length > 0) {
+    await sleep(2000);
+    return Promise.reject(errors);
+  } else {
+    await sleep(2000);
+    return user;
+  }
+};
+
+export const doSetUserName = async (setUsers, users, user, name) => {
+  const errors = [];
+  if (!user) return Promise.reject("Debes estar logeado primero");
+
+  const storedUser = users.find((u) => u.email === user.email);
+  const index = users.indexOf(storedUser, 0);
+
+  if (!storedUser)
+    errors.push("No se ha encontrado tu usuario en la base de datos");
+
+  name ? (user.name = name) : errors.push("El nombre no puede estar vacio");
+
+  users[index] = user;
+
+  setUsers([...users]);
+  // si llega hasta aca, significa que la promesa se resuelve bien
+  if (errors.length > 0) {
+    await sleep(2000);
+    return Promise.reject(errors);
+  } else {
+    await sleep(2000);
+    return user;
+  }
+};
+
+export const doSetUserPassword = async (setUsers, users, user, password) => {
+  const errors = [];
+  if (!user) return Promise.reject("Debes estar logeado primero");
+
+  const storedUser = users.find((u) => u.email === user.email);
+  const index = users.indexOf(storedUser, 0);
+
+  if (!storedUser)
+    errors.push("No se ha encontrado tu usuario en la base de datos");
+
+  password
+    ? (user.password = password)
+    : errors.push("La contraseña no puede estar vacia");
+
+  users[index] = user;
+
+  setUsers([...users]);
+  // si llega hasta aca, significa que la promesa se resuelve bien
+  if (errors.length > 0) {
+    await sleep(2000);
+    return Promise.reject(errors);
+  } else {
+    await sleep(2000);
+    return user;
+  }
 };
