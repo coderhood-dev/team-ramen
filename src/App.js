@@ -15,13 +15,12 @@ import {
 } from "./components/index";
 import { UserContext } from "./context/user";
 import { useState } from "react";
-
-import { useAuth } from "./hooks/useAuth";
+import { useUserModifier } from "./hooks/useUserModifier";
 
 function App() {
   const [user, setUser] = useState(null);
   const location = useLocation();
-  const { addpurchasedfilm } = useAuth();
+  const { addpurchasedfilm } = useUserModifier();
 
   return (
     <UserContext.Provider value={{ user, setUser }}>
@@ -33,18 +32,20 @@ function App() {
             <button
               style={{ marginTop: "5rem" }}
               onClick={(e) => {
+                //simulacion de agregar una pelicula a un usuario
                 e.preventDefault();
-                console.log("user", user);
-                addpurchasedfilm(user, { tile: "cap", price: 400 })
-                  .then((u) => {
-                    console.log(u);
+                console.log(user);
+                //addpurchasedfilm agrega la pelicula al usuario en el localStorage y devuelve el usuario actualizado,
+                addpurchasedfilm(user, { title: "sherk", price: "400" })
+                  .then((newUser) => {
+                    //como devuelve el usuario actualizado, podria setearse el nuevo usuario en contexto o hacer x cosas
+                    console.log(user);
+                    console.log(newUser);
                   })
-                  .catch((e) => {
-                    console.log(e);
-                    //setLoading(false);
-                  });
-              }}>
-              user
+                  .catch((e) => console.log(e));
+              }}
+            >
+              user and add film
             </button>
             <FooterBody />
           </Route>

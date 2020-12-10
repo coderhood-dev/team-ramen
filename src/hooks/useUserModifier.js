@@ -1,15 +1,20 @@
-import { useLocalStorageState } from "../hooks/useLocalStorage";
 import * as UserModifier from "../services/userModifiers";
+import { useLocalStorage2 } from "../hooks/useLocalStorage2";
+
+// esto podria ser un servicio de autentificacion como Firebase, AWS Cognito, o un endpoint de autentificacion de su propio backend
 
 export const useUserModifier = () => {
-  const [users, setUsers] = useLocalStorageState("users", []);
+  //conexion ficticia con base de datos, accede al valor del LS con key="users"
+  const [getUsers, setUsers] = useLocalStorage2("users");
+
   return {
-    // user = usuario logeado, se pasa por parametro
-    // setUser = setter del contexto 'user'.
-    // paso user y setUser por parametro porque ademas de modificar el localStorage debo modificar el contexto
-    addpurchasedfilm: (user, film) =>
-      UserModifier.doAddPurchasedFilm(setUsers, users, user, film),
-    addwishedfilm: (user) =>
-      UserModifier.doAddPurchasedFilm(users, setUsers, user),
+    addpurchasedfilm: (user, film) => {
+      const users = getUsers();
+      return UserModifier.doAddPurchasedFilm(setUsers, users, user, film);
+    },
+    addwishedfilm: (user) => {
+      const users = getUsers();
+      return UserModifier.doAddPurchasedFilm(setUsers, users, user);
+    },
   };
 };

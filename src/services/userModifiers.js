@@ -1,18 +1,16 @@
 import { sleep } from "../utils/sleep";
+
 // user = usuario logeado, se pasa por parametro
-// setUser = setter del contexto 'user'.
-// paso user y setUser por parametro porque ademas de modificar el localStorage debo modificar el contexto
 
 export const doAddPurchasedFilm = async (setUsers, users, user, film) => {
+  const errors = [];
+  if (!user) return Promise.reject("Debes estar logeado primero");
+
   const storedUser = users.find((u) => u.email === user.email);
   const index = users.indexOf(storedUser, 0);
 
-  console.log("users", users);
-  console.log("index", index);
-  console.log("user", user);
-  if (!storedUser) {
-    return Promise.reject("Debes estar logeado primero");
-  }
+  if (!storedUser)
+    errors.push("No se ha encontrado tu usuario en la base de datos");
 
   const newUser = {
     ...user,
@@ -21,10 +19,16 @@ export const doAddPurchasedFilm = async (setUsers, users, user, film) => {
   users[index] = newUser;
   setUsers([...users]);
   // si llega hasta aca, significa que la promesa se resuelve bien
-  return newUser;
+  if (errors.length > 0) {
+    await sleep(2000);
+    return Promise.reject(errors);
+  } else {
+    await sleep(2000);
+    return newUser;
+  }
 };
 
-export const doAddWishedFilm = async (users, setUsers, user) => {
+export const doAddWishedFilm = async (setUsers, users, user) => {
   // estos van a ser mis campos requeridos, todo servicio de autentificacion siempre va a tener campos requeridos
   const fieldsRequired = ["email", "password"];
   const errors = [];
