@@ -22,8 +22,8 @@ function App() {
   const [movie, setMovie] = React.useState(undefined);
   const location = useLocation();
   return (
-    <PopularMoviesContext.Provider value={{ movie, setMovie }}>
-      <UserContext.Provider value={{ user, setUser }}>
+    <UserContext.Provider value={{ user, setUser }}>
+      <PopularMoviesContext.Provider value={{ movie, setMovie }}>
         <AnimatePresence exitBeforeEnter>
           <Switch location={location} key={location.key}>
             <Route exact path="/">
@@ -54,8 +54,8 @@ function App() {
             </Route>
           </Switch>
         </AnimatePresence>
-      </UserContext.Provider>
-    </PopularMoviesContext.Provider>
+      </PopularMoviesContext.Provider>
+    </UserContext.Provider>
   );
 }
 
