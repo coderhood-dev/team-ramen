@@ -1,2 +1,2 @@
 export { useAuth } from "./useAuth";
-export { useLocalStorageState } from "./useLocalStorage";
+export { useLocalStorage } from "./useLocalStorage";

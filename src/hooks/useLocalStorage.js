@@ -1,37 +1,30 @@
-import * as React from "react";
+import { useState } from "react";
 
 /**
  *
  * @param {String} key The key to set in localStorage for this value
- * @param {Object} defaultValue The value to use if it is not already in localStorage
- * @param {{serialize: Function, deserialize: Function}} options The serialize and deserialize functions to use (defaults to JSON.stringify and JSON.parse respectively)
+ * @returns [ getter() , setter(data) ]
  */
 
-function useLocalStorageState(
-  key,
-  defaultValue = "",
-  { serialize = JSON.stringify, deserialize = JSON.parse } = {}
-) {
-  const [state, setState] = React.useState(() => {
-    const valueInLocalStorage = window.localStorage.getItem(key);
+export const useLocalStorage = (key = "default") => {
+  //un estado para almacenar la key del local storage
+  const [keyValue] = useState(key);
+
+  //obtener datos del localStorage
+  const getLocalStorage = () => {
+    const valueInLocalStorage = window.localStorage.getItem(keyValue);
     if (valueInLocalStorage) {
-      return deserialize(valueInLocalStorage);
+      return JSON.parse(valueInLocalStorage);
     }
-    return typeof defaultValue === "function" ? defaultValue() : defaultValue;
-  });
+    window.localStorage.setItem(keyValue, JSON.stringify([]));
+    return [];
+  };
 
-  const prevKeyRef = React.useRef(key);
-
-  React.useEffect(() => {
-    const prevKey = prevKeyRef.current;
-    if (prevKey !== key) {
-      window.localStorage.removeItem(prevKey);
-    }
-    prevKeyRef.current = key;
-    window.localStorage.setItem(key, serialize(state));
-  }, [key, state, serialize]);
-
-  return [state, setState];
-}
-
-export { useLocalStorageState };
+  //setear datos al local storage (en teoria, es anti errores)
+  const setLocalStorage = (data) => {
+    if (!data) return false;
+    if (data === null) return window.localStorage.setItem(keyValue, "");
+    window.localStorage.setItem(keyValue, JSON.stringify(data));
+  };
+  return [getLocalStorage, setLocalStorage];
+};
