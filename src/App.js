@@ -46,6 +46,7 @@ function App() {
           <Register />
         </Route>
         <Route exact path="/history">
+          <Header />
           <History />
         </Route>
       </Switch>

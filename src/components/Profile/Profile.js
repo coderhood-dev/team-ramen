@@ -91,7 +91,7 @@ export const Profile = () => {
     },
   };
   return (
-    <Flex overflowX="hidden" justifyContent="center">
+    <Flex justifyContent="center">
       <Background />
       <motion.div
         variants={variants}
@@ -99,9 +99,9 @@ export const Profile = () => {
         animate="visible"
         exit="exit"
       >
-        <Flex direction="column" marginTop="6.87rem" overflowX="scroll">
+        <Flex direction="column" marginTop="6.87rem" overflowX="hidden">
           <ProfileName>Lucas</ProfileName>
-          <Button route="/login" handleButtonPress={handleButtonPress}>
+          <Button route="/history" handleButtonPress={handleButtonPress}>
             Historial de compra
           </Button>
           <Button route="/register" handleButtonPress={handleButtonPress}>
@@ -109,6 +109,12 @@ export const Profile = () => {
           </Button>
           <Button route="/register" handleButtonPress={handleButtonPress}>
             Editar perfil
+          </Button>
+          <Button route="/register" handleButtonPress={handleButtonPress}>
+            Cerrar sesion
+          </Button>
+          <Button route="/register" handleButtonPress={handleButtonPress}>
+            Cerrar sesion
           </Button>
           <Button route="/register" handleButtonPress={handleButtonPress}>
             Cerrar sesion

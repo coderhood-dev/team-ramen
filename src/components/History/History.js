@@ -11,7 +11,8 @@ const Background = () => {
         w="100vw"
         bg="linear-gradient(180deg, #2D0101 2.09%, #600505 78.14%, #4B0404 102.09%)"
         position="fixed"
-        zIndex="-100"></Flex>
+        zIndex="-100"
+      ></Flex>
     </>
   );
 };
@@ -29,7 +30,8 @@ const BackButton = ({ handleGoBack }) => {
       justifyContent="center"
       align="center"
       as="button"
-      onClick={handleGoBack}>
+      onClick={handleGoBack}
+    >
       <HiOutlineArrowCircleLeft style={{ color: "black", fontSize: "3rem" }} />
     </Flex>
   );
@@ -43,35 +45,48 @@ const Title = ({ ...props }) => {
       color="white"
       fontSize="1.75rem"
       marginBottom="3.37rem"
-      maxW="auto">
+      maxW="auto"
+    >
       Las funciones que compraste
     </Text>
   );
 };
-const Film = ({ children }) => {
-  const film = {
-    title: "Capitan america",
-    price: "400",
-    date: "19/4",
-    img:
-      "https://www.cinemascomics.com/wp-content/uploads/2014/03/Capitan-America-el-Soldado-de-invierno.jpg",
-  };
+const Film = ({ props, film }) => {
   return (
     <Flex
       borderRadius="36px 10px"
       bg="rgba(0, 0, 0, 0.61)"
-      h="4.62rem"
-      maxW="20rem"
+      minH="4.62rem"
       boxShadow="lg"
+      alignItems="baseline"
+      justifyContent="space-between"
       minW="15rem"
-      color="pink.200">
-      {children}
+      color="white"
+      paddingY="1rem"
+      {...props}
+      marginBottom="1.5rem"
+    >
+      <Text
+        marginX="1.5rem"
+        marginRight="1rem"
+        flex="1"
+        fontWeight="bold"
+        fontSize="1.25rem"
+      >
+        {film.title}
+      </Text>
+      <Flex marginRight="1rem" flexDir="column">
+        <Text fontSize="1rem">${film.price}</Text>
+        <Text fontSize="0.75rem">{film.date}</Text>
+      </Flex>
     </Flex>
   );
 };
 
 export const History = () => {
   const history = useHistory();
+
+  //aca se debe llamar al contexto del gusuario logeado
 
   const handleGoBack = (e) => {
     e.preventDefault();
@@ -95,35 +110,48 @@ export const History = () => {
     },
   };
 
-  const peliculas = ["Sherk 1", "Sherk 2", "Sherk 3"];
-
-  function recorrerPeliculas(pelicula) {
-    return <Film>{pelicula}</Film>;
-  }
+  //dummie
+  const film = {
+    title: "Capitan america",
+    price: "400",
+    date: "19/4",
+    img:
+      "https://www.cinemascomics.com/wp-content/uploads/2014/03/Capitan-America-el-Soldado-de-invierno.jpg",
+  };
+  const peliculas = [film, film, film, film, film, film];
+  const user = {
+    name: "dummie",
+    purchasedFilms: peliculas,
+  };
+  //dummie
 
   return (
-    <Flex overflowX="hidden" justifyContent="center" w="100vw">
+    <Flex justifyContent="center" w="100vw">
       <Background></Background>
       <motion.div
         variants={variants}
         initial="hidden"
         animate="visible"
-        exit="exit">
+        exit="exit"
+      >
         <Flex
           alignItems="center"
           direction="column"
           marginTop="6.87rem"
-          overflowY="scroll"
-          w="100%">
+          w="100%"
+        >
           <Flex
             direction={["column", "row"]}
             justifyContent="center"
-            maxW="80vw">
+            maxW="80vw"
+          >
             <BackButton handleGoBack={handleGoBack} />
             <Title />
           </Flex>
-          <Flex direction="column" alignItems="center" maxW="80vw">
-            {peliculas.map(recorrerPeliculas)}
+          <Flex direction="column" alignItems="center">
+            {user.purchasedFilms.map((f) => (
+              <Film key={f.title} film={f} />
+            ))}
           </Flex>
         </Flex>
       </motion.div>
