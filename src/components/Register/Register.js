@@ -3,6 +3,8 @@ import { useState } from "react";
 import { useHistory } from "react-router-dom";
 import { motion } from "framer-motion";
 
+import { useAuth } from "../../hooks";
+
 const backgroundImage =
   "https://www.cinemascomics.com/wp-content/uploads/2013/04/Ironman3-poster.jpg";
 
@@ -12,17 +14,16 @@ const Background = () => {
       <Image
         position="absolute"
         h="100vh"
+        w="100vw"
         objectFit="cover"
         src={backgroundImage}
-        zIndex="-100"
-      ></Image>
+        zIndex="-100"></Image>
       <Flex
         h="100vh"
         w="100vw"
         bg="rgba(1, 1, 1, 0.71)"
         position="absolute"
-        zIndex="-50"
-      ></Flex>
+        zIndex="-50"></Flex>
     </>
   );
 };
@@ -33,8 +34,7 @@ const Title = ({ children }) => {
       fontSize="2rem"
       fontWeight="bold"
       color="white"
-      marginBottom="1.37rem"
-    >
+      marginBottom="1.37rem">
       {children}
     </Text>
   );
@@ -48,24 +48,21 @@ const Input = ({ ph, title, onChange, ...props }) => {
         fontWeight="normal"
         color="white"
         marginBottom="0.25rem"
-        boxShadow="lg"
-      >
+        boxShadow="lg">
         {title}
       </Text>
       <Flex
         background="white"
         border="5px solid #C53030"
         borderRadius="0.6rem"
-        boxShadow="lg"
-      >
+        boxShadow="lg">
         <ChakraInput
           onChange={onChange}
           variant="unstyled"
           placeholder={ph}
           paddingX="0.5rem"
           paddingY="0.25rem"
-          {...props}
-        ></ChakraInput>
+          {...props}></ChakraInput>
       </Flex>
     </Flex>
   );
@@ -80,8 +77,7 @@ const ErrorDisplay = ({ error }) => {
             marginY="0.3rem"
             color="white"
             maxW="14rem"
-            textAlign="center"
-          >
+            textAlign="center">
             {error}
           </Text>
         )}
@@ -103,14 +99,12 @@ const RegisterButton = ({ handleSubmit }) => {
       boxShadow="lg"
       transition="all 0.2s cubic-bezier(.08,.52,.52,1)"
       onClick={handleSubmit}
-      _focus={{ transform: "scale(1.1)" }}
-    >
+      _focus={{ transform: "scale(1.1)" }}>
       <Text
         fontSize="1.12rem"
         fontWeight="bold"
         color="black"
-        textShadow="0px 4px 4px rgba(0, 0, 0, 0.25)"
-      >
+        textShadow="0px 4px 4px rgba(0, 0, 0, 0.25)">
         Registrarse
       </Text>
     </Flex>
@@ -125,8 +119,7 @@ const Login = ({ handleGoLogin }) => {
       as="button"
       textDecoration="underline"
       justifySelf="flex-end"
-      onClick={handleGoLogin}
-    >
+      onClick={handleGoLogin}>
       Inicia sesion
     </Text>
   );
@@ -136,56 +129,71 @@ const Form = ({
   handleEmailChange,
   handlePasswordChange,
   handlePasswordRepeatChange,
+  handleNameChange,
 }) => {
   return (
-    <Flex as="form" direction="column">
+    <Flex as="form" direction="column" marginTop="4rem">
       <Title>Registrate</Title>
+      <Input ph="Bautista" title="Nombre" onChange={handleNameChange}></Input>
+      <Box marginY="0.75rem"></Box>
       <Input
         ph="bautista@gmail.com"
         title="Email"
-        onChange={handleEmailChange}
-      ></Input>
+        onChange={handleEmailChange}></Input>
       <Box marginY="0.75rem"></Box>
       <Input
         ph="Pepe1234"
         type="password"
         title="Contraseña"
-        onChange={handlePasswordChange}
-      ></Input>
+        onChange={handlePasswordChange}></Input>
       <Box marginY="0.75rem"></Box>
       <Input
         ph="Pepe1234"
         type="password"
         title={"Repite la contraseña"}
-        onChange={handlePasswordRepeatChange}
-      ></Input>
+        onChange={handlePasswordRepeatChange}></Input>
       <Box marginY="1.34rem"></Box>
       <RegisterButton handleSubmit={handleSubmit} />
     </Flex>
   );
 };
 export const Register = () => {
+  const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [passwordRepeat, setPasswordRepeat] = useState("");
   const [error, setError] = useState("");
 
   const history = useHistory();
+  const { signup } = useAuth();
 
   //form validation
   const handleSubmit = (event) => {
     event.preventDefault();
-    try {
-      if (password !== passwordRepeat)
-        throw new Error("Las contraseñas no coinciden");
-      if (password.length < 6)
-        throw new Error("La contraseña debe tener al menos 6 caracteres");
-    } catch (e) {
-      setError(e.message);
-    }
-    console.log(email, "  ", password);
+    setError("");
+
+    const user = {
+      name,
+      email,
+      password,
+      passwordRepeat,
+    };
+
+    signup(user)
+      .then(() => {
+        setError("");
+        //setLoading(false);
+        history.push("/login");
+      })
+      .catch((e) => {
+        setError(e[0]);
+        //setLoading(false);
+      });
   };
 
+  const handleNameChange = (event) => {
+    setName(event.target.value);
+  };
   const handleEmailChange = (event) => {
     setEmail(event.target.value);
   };
@@ -220,25 +228,26 @@ export const Register = () => {
   };
 
   return (
-    <Flex overflowX="hidden" justifyContent="center">
+    <Flex overflowX="hidden" justifyContent="center" h="100vh">
       <Background></Background>
       <motion.div
         variants={variants}
         initial="hidden"
         animate="visible"
-        exit="exit"
-      >
-        <Flex h="100vh" justifyContent="center" alignItems="center">
-          <Flex justifyContent="center" direction="column">
-            <Form
-              handleEmailChange={handleEmailChange}
-              handlePasswordChange={handlePasswordChange}
-              handleSubmit={handleSubmit}
-              handlePasswordRepeatChange={handlePasswordRepeatChange}
-            ></Form>
-            <ErrorDisplay error={error} />
-            <Login handleGoLogin={handleGoLogin} />
-          </Flex>
+        exit="exit">
+        <Flex
+          h="100%"
+          justifyContent="flex-start"
+          flexDir="column"
+          overflowX="scroll">
+          <Form
+            handleEmailChange={handleEmailChange}
+            handlePasswordChange={handlePasswordChange}
+            handleSubmit={handleSubmit}
+            handlePasswordRepeatChange={handlePasswordRepeatChange}
+            handleNameChange={handleNameChange}></Form>
+          <ErrorDisplay error={error} />
+          <Login handleGoLogin={handleGoLogin} />
         </Flex>
       </motion.div>
     </Flex>

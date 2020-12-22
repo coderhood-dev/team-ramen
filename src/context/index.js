@@ -1,1 +1,2 @@
-export { PopularMoviesContext } from './popularMovies';
+export { UserContext } from "./user";
+export { PopularMoviesContext } from "./popularMovies";
