@@ -16,3 +16,4 @@ export { Image } from './Image/Image';
 export { Home } from './Home/Home';
 export { Genre } from './Genre/Genre';
 export { DetailMovie } from './DetailMovie/DetailMovie';
+export { Layout } from './Layout/Layout';
