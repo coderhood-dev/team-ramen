@@ -6,13 +6,16 @@ import {
   Heading,
 } from '@chakra-ui/react';
 import { useHistory } from 'react-router-dom';
-import { PopularMoviesContext } from '../../context';
+import { PopularMoviesContext, UserContext } from '../../context';
 import { Image } from '../index';
+import { useUserModifier } from '../../hooks';
 
 export const DetailsMovies = () => {
   const history = useHistory();
   // let column = 2;
   const { movie } = React.useContext(PopularMoviesContext);
+  const { user, setUser } = React.useContext(UserContext);
+  const { addpurchasedfilm } = useUserModifier();
 
   // const [isLargerThan780] = useMediaQuery('(min-width: 780px)');
   // if (isLargerThan780) {
@@ -20,6 +23,20 @@ export const DetailsMovies = () => {
   // } else {
   //   column = 1;
   // }
+  const handleMoviePurchase = (e) => {
+    const m = {
+      id: movie.id,
+      title: movie.title,
+      img: `https://image.tmdb.org/t/p/original${movie.poster_path}`,
+      price: 400,
+    };
+    e.preventDefault();
+    addpurchasedfilm(user, m).then((newUser) => {
+      setUser(newUser);
+    }).catch(() => {
+      history.push('/login');
+    });
+  };
 
   if (!movie) {
     history.push('/');
@@ -70,6 +87,7 @@ box-shadow: 0rem 0.25rem 0.25rem rgba(0, 0, 0, 0.25)`}
             (e) => {
               e.preventDefault();
               history.push(`/purchase/${movie.id}`);
+              handleMoviePurchase(e);
             }
           }
         >

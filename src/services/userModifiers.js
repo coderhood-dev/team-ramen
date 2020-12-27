@@ -18,10 +18,10 @@ export const doAddPurchasedFilm = async (setUsers, users, user, film) => {
   if (!storedUser) errors.push('No se ha encontrado tu usuario en la base de datos');
 
   !user.totalSpent ? (user.totalSpent = 400) : (user.totalSpent += film.price);
-  if (user.purchasedFilm) user.purchasedFilm.push(film);
+  if (user.filmsPurchased) user.filmsPurchased.push(film);
   else {
-    user.purchasedFilm = [];
-    user.purchasedFilm.push(film);
+    user.filmsPurchased = [];
+    user.filmsPurchased.push(film);
   }
 
   users[index] = user;
