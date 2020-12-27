@@ -19,3 +19,4 @@ export { Genre } from './Genre/Genre';
 export { DetailMovie } from './DetailMovie/DetailMovie';
 export { Layout } from './Layout/Layout';
 export { Purchase } from './Purchase/Purchase';
+export { Logout } from './Logout/Logout';

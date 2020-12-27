@@ -1,5 +1,7 @@
 import React from 'react';
-import { Switch, Route, useLocation } from 'react-router-dom';
+import {
+  Switch, Route, useLocation,
+} from 'react-router-dom';
 import { Flex } from '@chakra-ui/react';
 import { AnimatePresence } from 'framer-motion';
 import {
@@ -13,6 +15,7 @@ import {
   Home,
   DetailMovie,
   Purchase,
+  Logout,
 } from './components';
 
 function App() {
@@ -50,6 +53,9 @@ function App() {
         </Route>
         <Route exact path="/purchase/:id">
           <Purchase />
+        </Route>
+        <Route exact path="/logout">
+          <Logout />
         </Route>
       </Switch>
     </AnimatePresence>
