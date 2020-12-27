@@ -7,6 +7,6 @@ export const customTheme = extendTheme({
     mono: 'Montserrat, monospace',
   },
   colors: {
-    background: '#14213d',
+    background: 'white',
   },
 });
