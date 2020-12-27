@@ -10,8 +10,9 @@ export const DetailMovie = () => (
       justifyContent="center"
       alignItems="center"
       w={['100%', '100%']}
-    />
-    <DetailsMovies />
-    <FooterDetailsMovies />
+    >
+      <DetailsMovies />
+      <FooterDetailsMovies />
+    </Flex>
   </Layout>
 );
