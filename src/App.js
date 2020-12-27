@@ -21,7 +21,7 @@ function App() {
       {' '}
       {/* exitBeforeEnter */}
       <Switch location={location} key={location.key}>
-        <Route exact path="/">
+        <Route exact path={['/', '/home']}>
           <Home />
         </Route>
         <Route exact path="/about">
