@@ -1,8 +1,10 @@
+/* eslint-disable no-console */
 import React from 'react';
 import { Flex, Text } from '@chakra-ui/react';
 import { motion } from 'framer-motion';
 import { useHistory } from 'react-router-dom';
 import { IoIosArrowForward } from 'react-icons/io';
+import { UserContext } from '../../context';
 
 const Background = () => (
   <>
@@ -32,7 +34,9 @@ const ProfileName = ({ children }) => (
   </Text>
 );
 
-const Button = ({ handleButtonPress, children, route }) => (
+const Button = ({
+  handleButtonPress, children, route, attribute,
+}) => (
   <Flex
     bg="linear-gradient(180deg, #B92929 0%, #C53030 15.62%, #A22424 100%)"
     boxShadow="0px 4px 4px rgba(0, 0, 0, 0.25)"
@@ -44,7 +48,7 @@ const Button = ({ handleButtonPress, children, route }) => (
     marginBottom="2.1rem"
     as="button"
     onClick={(e) => {
-      handleButtonPress(e, route);
+      handleButtonPress(e, route, attribute);
     }}
   >
     <Text
@@ -66,10 +70,13 @@ const Button = ({ handleButtonPress, children, route }) => (
 
 export const Profile = () => {
   const history = useHistory();
+  const { user } = React.useContext(UserContext);
 
-  const handleButtonPress = (e, route) => {
+  console.log(user);
+  const handleButtonPress = (e, route, attribute) => {
     e.preventDefault();
     history.push(route);
+    console.log(attribute);
   };
 
   const variants = {
@@ -88,6 +95,10 @@ export const Profile = () => {
       transition: { duration: 0.1, type: 'spring', stiffness: 100 },
     },
   };
+  if (!user) {
+    history.push('/home');
+    return (<></>);
+  }
   return (
     <Flex overflowX="hidden" justifyContent="center">
       <Background />
@@ -98,17 +109,20 @@ export const Profile = () => {
         exit="exit"
       >
         <Flex direction="column" marginTop="6.87rem" overflowX="scroll">
-          <ProfileName>Lucas</ProfileName>
-          <Button route="/login" handleButtonPress={handleButtonPress}>
+          <ProfileName>{user.name}</ProfileName>
+          <Button attribute={user.filmsPurchased} route="/profile" handleButtonPress={handleButtonPress}>
             Historial de compra
           </Button>
-          <Button route="/register" handleButtonPress={handleButtonPress}>
+          <Button attribute={user.wishedFilms} route="/profile" handleButtonPress={handleButtonPress}>
             Lista de deseados
           </Button>
-          <Button route="/register" handleButtonPress={handleButtonPress}>
+          <Button route="/profile" handleButtonPress={handleButtonPress}>
             Editar perfil
           </Button>
-          <Button route="/register" handleButtonPress={handleButtonPress}>
+          <Button
+            route="/logout"
+            handleButtonPress={handleButtonPress}
+          >
             Cerrar sesion
           </Button>
         </Flex>
