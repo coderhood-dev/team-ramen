@@ -1,7 +1,7 @@
-export const FooterBody = () => {
-    return (
-        <div>
-            FooterBody
-        </div>
-    )
-}
+import React from 'react';
+
+export const FooterBody = () => (
+  <div>
+    FooterBody
+  </div>
+);

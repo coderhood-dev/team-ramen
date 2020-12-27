@@ -51,7 +51,7 @@ export const GridMovies = () => {
         <Spinner size="xl" />
       </Flex>
     );
-  } else if (error) {
+  } if (error) {
     return <Text>{error}</Text>;
   }
 
@@ -72,7 +72,7 @@ export const GridMovies = () => {
   }
   const genderName = getGenderById(id);
   return (
-    <Box bg={`linear-gradient(180deg, #AF1B1B 2.09%, #470909 90.11%)`}>
+    <Box bg="linear-gradient(180deg, #AF1B1B 2.09%, #470909 90.11%)">
       <Heading
         as="h1"
         pl="1.63rem"
@@ -81,28 +81,28 @@ export const GridMovies = () => {
         fontStyle="normal"
         fontWeight="bold"
         color="#220707"
-        textShadow={`0rem 0.25rem 0.25rem rgba(0, 0, 0, 0.25)`}
+        textShadow="0rem 0.25rem 0.25rem rgba(0, 0, 0, 0.25)"
         fontSize={{ base: '1.57rem', md: '1.57rem', lg: '2rem' }}
       >
-        Peliculas de {genderName}
+        Peliculas de
+        {' '}
+        {genderName}
       </Heading>
       <Grid p="1.25rem" templateColumns={`repeat(${column} , 1fr)`} gap={3}>
-        {movies.map((movie) => {
-          return (
-            <Image
-              w="100%"
-              h="17.50rem"
-              cursor="pointer"
-              key={movie.id}
-              src={`https://image.tmdb.org/t/p/original${movie.poster_path}`}
-              alt={movie.title}
-              onClick={() => {
-                setMovie(movie);
-                history.push(`/details/${movie.id}`);
-              }}
-            />
-          );
-        })}
+        {movies.map((movie) => (
+          <Image
+            w="100%"
+            h="17.50rem"
+            cursor="pointer"
+            key={movie.id}
+            src={`https://image.tmdb.org/t/p/original${movie.poster_path}`}
+            alt={movie.title}
+            onClick={() => {
+              setMovie(movie);
+              history.push(`/details/${movie.id}`);
+            }}
+          />
+        ))}
       </Grid>
       <Flex align="center" justify="center">
         <Button

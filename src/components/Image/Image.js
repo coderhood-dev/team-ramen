@@ -1,19 +1,28 @@
 import React from 'react';
 import { Image as ChakraImage, Spinner, Flex } from '@chakra-ui/react';
 
-export const Image = (props) => {
+export const Image = ({
+  w, h, cursor, key, src, alt, onClick,
+}) => {
   const [loading, isLoading] = React.useState(true);
 
   const handleOnLoad = () => {
     isLoading(false);
   };
   return (
-    <Flex bg="black" width={props.w} height="17.40rem">
-      <ChakraImage onLoad={handleOnLoad} {...props} />
+    <Flex bg="black" width={w} height="17.40rem">
+      <ChakraImage
+        onLoad={handleOnLoad}
+        cursor={cursor}
+        key={key}
+        src={src}
+        alt={alt}
+        onClick={onClick}
+      />
       {loading && (
         <Flex
           width="1,5rem"
-          height={props.h}
+          height={h}
           position="absolute"
           justify="center"
           align="center"

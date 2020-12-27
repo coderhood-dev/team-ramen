@@ -1,3 +1,4 @@
+/* eslint-disable import/no-cycle */
 export { Header } from './Header/Header';
 export { Body } from './Body/Body';
 export { FooterDetailsMovies } from './FooterDetailsMovies/FooterDetailsMovies';

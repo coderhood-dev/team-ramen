@@ -1,10 +1,12 @@
-import React from "react";
-import { Flex, Text, Spinner, Box, useMediaQuery } from "@chakra-ui/react";
-import { CarouselPopularMovies, GridPopularMovies } from "../index";
-import { getPopularMovies } from "../../api/popularMovies";
+import React from 'react';
+import {
+  Flex, Text, Spinner, Box, useMediaQuery,
+} from '@chakra-ui/react';
+import { CarouselPopularMovies, GridPopularMovies } from '../index';
+import { getPopularMovies } from '../../api/popularMovies';
 
 export const Body = () => {
-  const [isLargerThan780] = useMediaQuery("(min-width: 780px)");
+  const [isLargerThan780] = useMediaQuery('(min-width: 780px)');
   const [loading, setLoading] = React.useState(false);
   const [movies, setMovies] = React.useState([]);
   const [error, setError] = React.useState(null);
@@ -34,7 +36,7 @@ export const Body = () => {
         <Spinner size="xl" />
       </Flex>
     );
-  } else if (error) {
+  } if (error) {
     return <Text>{error}</Text>;
   }
 

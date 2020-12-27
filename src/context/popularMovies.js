@@ -8,7 +8,7 @@ export const PopularMoviesProvider = ({ children }) => {
     <PopularMoviesContext.Provider
       value={{
         movie,
-        setMovie: (movie) => setMovie(movie),
+        setMovie: (m) => setMovie(m),
       }}
     >
       {children}

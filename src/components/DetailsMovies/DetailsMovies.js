@@ -23,7 +23,7 @@ export const DetailsMovies = () => {
     column = 1;
   }
   return (
-    <Box bg={`linear-gradient(180deg, #AF1B1B 2.09%, #470909 90.11%)`}>
+    <Box bg="linear-gradient(180deg, #AF1B1B 2.09%, #470909 90.11%)">
       <Flex align="center" justify="space-between">
         <Heading
           as="h1"
@@ -34,7 +34,7 @@ export const DetailsMovies = () => {
           fontStyle="normal"
           fontWeight="bold"
           color="#220707"
-          textShadow={`0rem 0.25rem 0.25rem rgba(0, 0, 0, 0.25)`}
+          textShadow="0rem 0.25rem 0.25rem rgba(0, 0, 0, 0.25)"
           fontSize={{ base: '1.57rem', md: '1.57rem', lg: '2rem' }}
         >
           {movie.title}
@@ -42,7 +42,7 @@ export const DetailsMovies = () => {
         <Button
           mr="1.75rem"
           onClick={() => {
-            history.push(`/`);
+            history.push('/');
           }}
           color="#A72626"
           w="12.5rem"
