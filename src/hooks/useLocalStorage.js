@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState } from 'react';
 
 /**
  *
@@ -6,11 +6,11 @@ import { useState } from "react";
  * @returns [ getter() , setter(data) ]
  */
 
-export const useLocalStorage = (key = "default") => {
-  //un estado para almacenar la key del local storage
+export const useLocalStorage = (key = 'default') => {
+  // un estado para almacenar la key del local storage
   const [keyValue] = useState(key);
 
-  //obtener datos del localStorage
+  // obtener datos del localStorage
   const getLocalStorage = () => {
     const valueInLocalStorage = window.localStorage.getItem(keyValue);
     if (valueInLocalStorage) {
@@ -20,11 +20,11 @@ export const useLocalStorage = (key = "default") => {
     return [];
   };
 
-  //setear datos al local storage (en teoria, es anti errores)
+  // setear datos al local storage (en teoria, es anti errores)
   const setLocalStorage = (data) => {
     if (!data) return false;
-    if (data === null) return window.localStorage.setItem(keyValue, "");
-    window.localStorage.setItem(keyValue, JSON.stringify(data));
+    if (data === null) return window.localStorage.setItem(keyValue, '');
+    return window.localStorage.setItem(keyValue, JSON.stringify(data));
   };
   return [getLocalStorage, setLocalStorage];
 };

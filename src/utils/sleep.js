@@ -1,7 +1,5 @@
-export const sleep = (time = 2000) => {
-  return new Promise((resolve, reject) => {
-    setTimeout(() => {
-      resolve();
-    }, time);
-  });
-};
+export const sleep = (time = 2000) => new Promise((resolve) => {
+  setTimeout(() => {
+    resolve();
+  }, time);
+});

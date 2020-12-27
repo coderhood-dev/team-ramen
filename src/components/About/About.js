@@ -1,7 +1,7 @@
-export const About = () => {
-    return (
-        <div>
-            About
-        </div>
-    )
-}
+import React from 'react';
+
+export const About = () => (
+  <div>
+    About
+  </div>
+);

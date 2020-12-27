@@ -1,9 +1,9 @@
-import * as UserModifier from "../services/userModifiers";
-import { useLocalStorage } from "./";
+import * as UserModifier from '../services/userModifiers';
+import { useLocalStorage } from '.';
 
 export const useUserModifier = () => {
-  //conexion ficticia con base de datos, accede al valor del LS con key="users"
-  const [getUsers, setUsers] = useLocalStorage("users");
+  // conexion ficticia con base de datos, accede al valor del LS con key="users"
+  const [getUsers, setUsers] = useLocalStorage('users');
 
   return {
     addpurchasedfilm: (user, film) => {

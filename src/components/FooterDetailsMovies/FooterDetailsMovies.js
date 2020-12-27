@@ -1,9 +1,8 @@
-import {Box} from '@chakra-ui/react'
+import React from 'react';
+import { Box } from '@chakra-ui/react';
 
-export const FooterDetailsMovies = () => {
-    return (
-        <Box>
-            FooterDetailsMovies
-        </Box>
-    )
-}
+export const FooterDetailsMovies = () => (
+  <Box>
+    FooterDetailsMovies
+  </Box>
+);
