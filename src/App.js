@@ -12,6 +12,7 @@ import {
   Genre,
   Home,
   DetailMovie,
+  Purchase,
 } from './components';
 
 function App() {
@@ -46,6 +47,9 @@ function App() {
         </Route>
         <Route exact path="/register">
           <Register />
+        </Route>
+        <Route exact path="/purchase/:id">
+          <Purchase />
         </Route>
       </Switch>
     </AnimatePresence>
