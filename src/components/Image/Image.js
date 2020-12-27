@@ -10,7 +10,7 @@ export const Image = ({
     isLoading(false);
   };
   return (
-    <Flex bg="black" width={w} height="17.40rem">
+    <Flex bg="black" width={w} height={h}>
       <ChakraImage
         onLoad={handleOnLoad}
         cursor={cursor}
