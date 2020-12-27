@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 import React from 'react';
 import { Flex, Text, Button } from '@chakra-ui/react';
 import { FaBars } from 'react-icons/fa';
