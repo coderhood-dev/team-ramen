@@ -3,6 +3,8 @@ import React from 'react';
 import { Flex, Text, Button } from '@chakra-ui/react';
 import { FaBars } from 'react-icons/fa';
 import { motion } from 'framer-motion';
+import { useHistory } from 'react-router-dom';
+import { UserContext } from '../../context';
 
 const MotionFlex = motion.custom(Flex);
 
@@ -43,7 +45,7 @@ const SideMenuButton = ({ handleSideMenu }) => (
   </Flex>
 );
 
-const BlackBackground = ({ handleSideMenu }) => (
+const BlackBackground = ({ handleSideMenu, user, history }) => (
   // const variants = {
   //   hidden: { opacity: 0 },
   //   visible: { opacity: 1 },
@@ -67,6 +69,7 @@ const BlackBackground = ({ handleSideMenu }) => (
       left="0"
       top="0"
       onClick={handleSideMenu}
+      zIndex="100"
     />
     {/* </motion.div> */}
 
@@ -86,20 +89,38 @@ const BlackBackground = ({ handleSideMenu }) => (
       top="0"
       right="0"
       position="absolute"
-      zIndex="100"
+      zIndex="popover"
       align="center"
       justifyContent="center"
     >
-      <Flex flexDir="column">
+      <Flex flexDir="column" zIndex="-1000">
+        {user ? (
+          <MenuButton
+            onClick={(e) => {
+              e.preventDefault();
+              history.push('/profile');
+            }}
+          >
+            Perfil
+          </MenuButton>
+        ) : (
+          <MenuButton
+            onClick={(e) => {
+              e.preventDefault();
+              history.push('/login');
+            }}
+          >
+            Login
+          </MenuButton>
+        )}
+
         <MenuButton
-          onClick={() => console.log('funciones')}
+          onClick={(e) => {
+            e.preventDefault();
+            history.push('/');
+          }}
         >
           Funciones
-        </MenuButton>
-        <MenuButton
-          onClick={() => console.log('ofertas')}
-        >
-          Ofertas
         </MenuButton>
         <MenuButton
           onClick={() => console.log('coderhood')}
@@ -118,6 +139,8 @@ const BlackBackground = ({ handleSideMenu }) => (
 );
 export const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = React.useState(false);
+  const { user } = React.useContext(UserContext);
+  const history = useHistory();
 
   const handleToogleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
@@ -153,7 +176,7 @@ export const Header = () => {
           Title
         </Text>
       </Flex>
-      {isMenuOpen ? <BlackBackground handleSideMenu={handleToogleMenu} /> : ''}
+      {isMenuOpen ? <BlackBackground history={history} user={user} handleSideMenu={handleToogleMenu} /> : ''}
       <SideMenuButton handleSideMenu={handleToogleMenu} />
     </Flex>
   );
